@@ -19,7 +19,9 @@ const nodeHttp2IsSupported = () => {
   if (
     typeof process !== "undefined" &&
     process &&
-    process.release?.name === "node"
+    process.release?.name === "node" &&
+    // Deno's http2 implementation is broken
+    process.versions?.deno === undefined
   ) {
     try {
       require("node:http2");
